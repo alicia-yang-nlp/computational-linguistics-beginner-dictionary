@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="给零基础学习者的计算语言学入门词典。" />
+    <title>计算语言学入门词典</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#" aria-label="返回首页">
+          <span class="brand-mark">言</span>
+          <span>
+            <strong>计算语言学</strong>
+            <small>入门词典</small>
+          </span>
+        </a>
+        <div class="header-note">从“语言是什么”开始，慢慢走到 AI 怎样理解语言。</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A BEGINNER'S DICTIONARY</p>
+          <h1>把语言拆开，<br /><em>让机器也能听懂。</em></h1>
+          <p class="hero-intro">
+            50 个最基础、最重要的概念。每个词条都用清楚的中文、例子和真实应用，
+            帮你建立计算语言学的第一张地图。
+          </p>
+          <div class="hero-actions">
+            <button class="button button-primary" data-scroll-to="dictionary">开始探索 <span>↓</span></button>
+            <button class="button button-quiet" data-filter="已完成">查看已完成词条</button>
+          </div>
+        </div>
+        <div class="hero-map" aria-label="词典学习路径示意图">
+          <div class="map-label">学习路径</div>
+          <div class="map-line line-one"></div>
+          <div class="map-line line-two"></div>
+          <div class="map-line line-three"></div>
+          <div class="map-node node-one"><b>01</b><span>语言</span></div>
+          <div class="map-node node-two"><b>02</b><span>数据</span></div>
+          <div class="map-node node-three"><b>03</b><span>模型</span></div>
+          <div class="map-node node-four"><b>04</b><span>应用</span></div>
+        </div>
+      </section>
+
+      <section class="stats-bar" aria-label="词典进度">
+        <div><strong>50</strong><span>计划词条</span></div>
+        <div><strong>50</strong><span>词条完成</span></div>
+        <div><strong>6</strong><span>主题分类</span></div>
+        <div><strong>0</strong><span>先修门槛</span></div>
+      </section>
+
+      <section class="dictionary-section" id="dictionary">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">EXPLORE THE DICTIONARY</p>
+            <h2>先从一个词开始</h2>
+          </div>
+          <p class="section-aside">可以按分类浏览，也可以直接搜索中文、英文或缩写。</p>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="搜索词条，例如：语料库、NLP、language model" />
+          </label>
+          <div class="filter-list" id="filterList" aria-label="词条分类"></div>
+        </div>
+
+        <div class="dictionary-layout">
+          <div>
+            <div class="results-meta"><span id="resultsCount">50</span> 个词条</div>
+            <div class="term-grid" id="termGrid"></div>
+          </div>
+          <aside class="entry-panel" id="entryPanel" aria-live="polite">
+            <div class="panel-kicker">词条预览</div>
+            <div id="entryContent"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="principles">
+        <div>
+          <p class="eyebrow">EDITORIAL PRINCIPLES</p>
+          <h2>每个词条都回答三个问题</h2>
+        </div>
+        <div class="principle-grid">
+          <article><span>01</span><h3>它是什么？</h3><p>用不依赖专业背景的语言，先把概念说清楚。</p></article>
+          <article><span>02</span><h3>为什么重要？</h3><p>放进一个真实任务里，看见它解决了什么问题。</p></article>
+          <article><span>03</span><h3>还能怎么理解？</h3><p>用例句、图示和相关词条，把抽象概念连起来。</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>计算语言学入门词典</strong>
+        <p>第一版 · 2026</p>
+      </div>
+      <p>50 个入门词条。内容会继续补充媒体、链接和交互示例。</p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
