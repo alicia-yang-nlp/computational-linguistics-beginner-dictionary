@@ -210,9 +210,8 @@ function renderTerms() {
   const visible = getVisibleEntries();
   resultsCount.textContent = visible.length;
   termGrid.innerHTML = visible.length ? visible.map(entry =>
-    `<button class="term-card ${entry.complete ? "complete" : ""} ${entry.id === selectedId ? "selected" : ""}" data-id="${entry.id}">
+    `<button class="term-card ${entry.id === selectedId ? "selected" : ""}" data-id="${entry.id}">
       <span class="number">${String(entry.id).padStart(2, "0")} · ${entry.category}</span>
-      <span class="status">${entry.complete ? "已完成" : "编纂中"}</span>
       <h3>${entry.term}</h3>
       <p>${entry.english}</p>
     </button>`
@@ -295,16 +294,13 @@ document.querySelectorAll("[data-scroll-to]").forEach(button => {
   button.addEventListener("click", () => document.getElementById(button.dataset.scrollTo).scrollIntoView());
 });
 
-document.querySelector("[data-filter]").addEventListener("click", () => {
+document.querySelector("[data-browse-all]").addEventListener("click", () => {
   selectedCategory = "全部";
   searchInput.value = "";
   renderFilters();
   renderTermSelect();
   renderTerms();
   document.getElementById("dictionary").scrollIntoView();
-  setTimeout(() => {
-    document.querySelector(".term-card.complete")?.click();
-  }, 350);
 });
 
 document.querySelectorAll("[data-map-category]").forEach(button => {
