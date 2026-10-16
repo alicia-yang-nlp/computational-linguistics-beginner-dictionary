@@ -17,7 +17,7 @@
             <small>入门词典</small>
           </span>
         </a>
-        <div class="header-note">从“语言是什么”开始，慢慢走到 AI 怎样理解语言。</div>
+        <div class="header-note">从语言的结构，到机器理解与生成语言的方法。</div>
       </div>
     </header>
 
@@ -25,32 +25,42 @@
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">A BEGINNER'S DICTIONARY</p>
-          <h1>把语言拆开，<br /><em>让机器也能听懂。</em></h1>
+          <h1>揭开语言与机器的奥秘，<br /><em>从零开始，快速上手。</em></h1>
           <p class="hero-intro">
-            50 个最基础、最重要的概念。每个词条都用清楚的中文、例子和真实应用，
-            帮你建立计算语言学的第一张地图。
+            50 个最基础、最重要的概念。用清楚的释义、例子、关联概念和行业应用，
+            帮你从“语言是什么”走到“AI 如何处理语言”。
           </p>
           <div class="hero-actions">
             <button class="button button-primary" data-scroll-to="dictionary">开始探索 <span>↓</span></button>
             <button class="button button-quiet" data-filter="已完成">查看已完成词条</button>
           </div>
         </div>
-        <div class="hero-map" aria-label="词典学习路径示意图">
-          <div class="map-label">学习路径</div>
-          <div class="map-line line-one"></div>
-          <div class="map-line line-two"></div>
-          <div class="map-line line-three"></div>
-          <div class="map-node node-one"><b>01</b><span>语言</span></div>
-          <div class="map-node node-two"><b>02</b><span>数据</span></div>
-          <div class="map-node node-three"><b>03</b><span>模型</span></div>
-          <div class="map-node node-four"><b>04</b><span>应用</span></div>
+        <div class="hero-map" aria-label="计算语言学学习路径">
+          <div class="map-label">从概念到应用的学习路径</div>
+          <div class="learning-roadmap">
+            <article class="road-step">
+              <b>01</b><strong>认识语言</strong><p>词、句法、语义与语用</p>
+            </article>
+            <span class="road-arrow" aria-hidden="true">→</span>
+            <article class="road-step">
+              <b>02</b><strong>整理数据</strong><p>字符、分词与语料库</p>
+            </article>
+            <span class="road-arrow" aria-hidden="true">→</span>
+            <article class="road-step">
+              <b>03</b><strong>理解模型</strong><p>机器学习与语言模型</p>
+            </article>
+            <span class="road-arrow" aria-hidden="true">→</span>
+            <article class="road-step road-step-highlight">
+              <b>04</b><strong>解决问题</strong><p>翻译、问答与生成</p>
+            </article>
+          </div>
         </div>
       </section>
 
       <section class="stats-bar" aria-label="词典进度">
         <div><strong>50</strong><span>计划词条</span></div>
         <div><strong>50</strong><span>词条完成</span></div>
-        <div><strong>6</strong><span>主题分类</span></div>
+        <div><strong>6</strong><span>学习模块</span></div>
         <div><strong>0</strong><span>先修门槛</span></div>
       </section>
 
@@ -72,14 +82,14 @@
         </div>
 
         <div class="dictionary-layout">
-          <div>
+          <aside class="entry-panel" id="entryPanel" aria-live="polite">
+            <div class="panel-kicker">正在阅读</div>
+            <div id="entryContent"></div>
+          </aside>
+          <div class="terms-area">
             <div class="results-meta"><span id="resultsCount">50</span> 个词条</div>
             <div class="term-grid" id="termGrid"></div>
           </div>
-          <aside class="entry-panel" id="entryPanel" aria-live="polite">
-            <div class="panel-kicker">词条预览</div>
-            <div id="entryContent"></div>
-          </aside>
         </div>
       </section>
 
@@ -90,8 +100,8 @@
         </div>
         <div class="principle-grid">
           <article><span>01</span><h3>它是什么？</h3><p>用不依赖专业背景的语言，先把概念说清楚。</p></article>
-          <article><span>02</span><h3>为什么重要？</h3><p>放进一个真实任务里，看见它解决了什么问题。</p></article>
-          <article><span>03</span><h3>还能怎么理解？</h3><p>用例句、图示和相关词条，把抽象概念连起来。</p></article>
+          <article><span>02</span><h3>怎样关联？</h3><p>通过相近概念，建立属于自己的知识网络。</p></article>
+          <article><span>03</span><h3>用在哪里？</h3><p>连接真实行业场景，看见它解决什么问题。</p></article>
         </div>
       </section>
     </main>

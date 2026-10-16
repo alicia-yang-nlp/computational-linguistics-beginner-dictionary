@@ -1,4 +1,4 @@
-const categories = ["全部", "基础概念", "语言学基础", "文本处理", "句法与意义", "常见任务"];
+const categories = ["全部", "学科导览", "语言基础", "数据与表示", "模型与方法", "语言分析", "应用任务"];
 
 const entries = [
   {
@@ -97,6 +97,80 @@ const remaining = [
 }));
 
 const allEntries = [...entries, ...remaining];
+
+const categoryByTerm = {
+  "计算语言学": "学科导览", "自然语言处理": "学科导览",
+  "人工语言与自然语言": "语言基础", "语音": "语言基础", "音位": "语言基础", "文字与字符": "语言基础", "词": "语言基础", "词素": "语言基础", "词法": "语言基础", "句子": "语言基础", "句法": "语言基础", "语义": "语言基础", "语用": "语言基础",
+  "语言数据": "数据与表示", "语料库": "数据与表示", "字符": "数据与表示", "分词": "数据与表示", "中文分词": "数据与表示", "词形还原": "数据与表示", "词干提取": "数据与表示", "停用词": "数据与表示",
+  "规则与统计方法": "模型与方法", "机器学习": "模型与方法", "深度学习": "模型与方法", "语言模型": "模型与方法", "生成式人工智能": "模型与方法", "大语言模型": "模型与方法",
+  "词性": "语言分析", "词性标注": "语言分析", "命名实体": "语言分析", "命名实体识别": "语言分析", "句法分析": "语言分析", "依存句法": "语言分析", "短语结构": "语言分析", "句法树": "语言分析", "词义": "语言分析", "词义消歧": "语言分析", "同义词与反义词": "语言分析", "词语共现": "语言分析", "词向量": "语言分析", "上下文": "语言分析",
+  "文本分类": "应用任务", "情感分析": "应用任务", "信息抽取": "应用任务", "自动摘要": "应用任务", "机器翻译": "应用任务", "问答系统": "应用任务", "文本生成": "应用任务", "语音识别": "应用任务", "文本转语音": "应用任务"
+};
+
+const relatedByTerm = {
+  "计算语言学": ["自然语言处理", "语言学基础", "机器学习"],
+  "自然语言处理": ["计算语言学", "语言模型", "应用任务"],
+  "语言数据": ["语料库", "文本分类", "命名实体识别"],
+  "语料库": ["语言数据", "词语共现", "语言模型"],
+  "语言模型": ["深度学习", "大语言模型", "文本生成"],
+  "中文分词": ["分词", "词性标注", "中文"],
+  "机器学习": ["深度学习", "文本分类", "语言数据"],
+  "深度学习": ["机器学习", "语言模型", "词向量"],
+  "大语言模型": ["语言模型", "生成式人工智能", "文本生成"],
+  "命名实体识别": ["命名实体", "信息抽取", "词性标注"],
+  "依存句法": ["句法分析", "句法树", "词性标注"],
+  "词义消歧": ["词义", "上下文", "机器翻译"],
+  "词向量": ["词语共现", "深度学习", "上下文"],
+  "情感分析": ["文本分类", "词义", "上下文"],
+  "机器翻译": ["语言模型", "词义消歧", "语料库"],
+  "问答系统": ["信息抽取", "大语言模型", "上下文"],
+  "语音识别": ["语音", "音位", "文本转语音"],
+  "文本转语音": ["语音", "音位", "语音识别"]
+};
+
+const industryByCategory = {
+  "学科导览": ["智能搜索与知识服务", "教育科技与学习工具"],
+  "语言基础": ["语言教育与智能批改", "语音与无障碍产品"],
+  "数据与表示": ["企业文档检索", "多语言内容管理"],
+  "模型与方法": ["智能客服与办公助手", "内容创作与开发工具"],
+  "语言分析": ["舆情洞察与内容审核", "合同、简历与新闻解析"],
+  "应用任务": ["在线服务与客户体验", "内容生产与信息管理"]
+};
+
+const industryByTerm = {
+  "文本分类": ["客服工单分流", "内容审核与新闻推荐"],
+  "情感分析": ["电商评价洞察", "品牌舆情监测"],
+  "信息抽取": ["合同与报告解析", "企业情报与知识图谱"],
+  "自动摘要": ["会议纪要整理", "新闻与研究资料速读"],
+  "机器翻译": ["跨境电商与本地化", "旅行和跨语言沟通"],
+  "问答系统": ["企业知识库助手", "在线客服与教育辅导"],
+  "文本生成": ["写作与办公辅助", "营销内容与代码说明"],
+  "语音识别": ["会议转写与字幕", "语音助手与车载交互"],
+  "文本转语音": ["无障碍阅读", "导航与智能客服"],
+  "大语言模型": ["知识工作辅助", "产品内智能助手"]
+};
+
+const categoryConcepts = {
+  "学科导览": ["计算语言学", "自然语言处理", "语言模型"],
+  "语言基础": ["词", "句法", "语义", "语用"],
+  "数据与表示": ["语料库", "分词", "中文分词", "词形还原"],
+  "模型与方法": ["机器学习", "深度学习", "语言模型", "大语言模型"],
+  "语言分析": ["词性标注", "句法分析", "词义消歧", "上下文"],
+  "应用任务": ["文本分类", "信息抽取", "机器翻译", "问答系统"]
+};
+
+function resolveRelated(entry) {
+  const preferred = relatedByTerm[entry.term] || categoryConcepts[entry.category] || [];
+  return preferred
+    .filter(term => term !== entry.term && allEntries.some(item => item.term === term))
+    .slice(0, 3);
+}
+
+allEntries.forEach(entry => {
+  entry.category = categoryByTerm[entry.term] || entry.category;
+  entry.related = resolveRelated(entry);
+  entry.industryApplications = industryByTerm[entry.term] || industryByCategory[entry.category];
+});
 let selectedCategory = "全部";
 let selectedId = 1;
 
@@ -154,18 +228,43 @@ function renderEntry() {
   const diagram = entry.id <= 5
     ? `<div class="diagram"><span>语言</span><i></i><span>数据</span><i></i><span>模型</span></div>`
     : "";
+  const related = entry.related.map(term =>
+    `<button class="related-chip" data-related-term="${term}">${term}</button>`
+  ).join("");
+  const industry = entry.industryApplications.map(item =>
+    `<div class="industry-item">${item}</div>`
+  ).join("");
   entryContent.innerHTML = `
     <h3>${entry.term}</h3>
     <div class="english">${entry.english}</div>
-    <p class="definition">${entry.definition}</p>
+    <div class="definition-block">
+      <div class="label">核心释义</div>
+      <p class="definition">${entry.definition}</p>
+    </div>
     ${diagram}
     <div class="label">例句</div>
     <div class="example">${entry.example}</div>
-    <div class="label">应用</div>
+    <div class="label">它能做什么</div>
     <p class="application">${entry.application}</p>
+    <div class="label">相关概念</div>
+    <div class="chip-list">${related}</div>
+    <div class="label">行业应用</div>
+    <div class="industry-list">${industry}</div>
     <div class="label">资料来源</div>
     <p class="source">${entry.source}</p>
   `;
+  entryContent.querySelectorAll("[data-related-term]").forEach(button => {
+    button.addEventListener("click", () => {
+      const relatedEntry = allEntries.find(item => item.term === button.dataset.relatedTerm);
+      if (!relatedEntry) return;
+      selectedId = relatedEntry.id;
+      selectedCategory = "全部";
+      searchInput.value = "";
+      renderFilters();
+      renderTerms();
+      renderEntry();
+    });
+  });
 }
 
 searchInput.addEventListener("input", renderTerms);
