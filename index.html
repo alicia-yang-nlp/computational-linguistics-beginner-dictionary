@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="给零基础学习者的计算语言学入门词典。" />
     <title>计算语言学入门词典</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20261016-2" />
   </head>
   <body>
     <header class="site-header">
@@ -25,34 +25,29 @@
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">A BEGINNER'S DICTIONARY</p>
-          <h1>揭开语言与机器的奥秘，<br /><em>从零开始，快速上手。</em></h1>
+          <h1>从零开始，<br /><em>读懂计算语言学。</em></h1>
           <p class="hero-intro">
-            50 个最基础、最重要的概念。用清楚的释义、例子、关联概念和行业应用，
-            帮你从“语言是什么”走到“AI 如何处理语言”。
+            用 50 个核心概念，建立一张从语言到 AI 应用的清晰地图。
           </p>
           <div class="hero-actions">
             <button class="button button-primary" data-scroll-to="dictionary">开始探索 <span>↓</span></button>
             <button class="button button-quiet" data-filter="已完成">查看已完成词条</button>
           </div>
         </div>
-        <div class="hero-map" aria-label="计算语言学学习路径">
-          <div class="map-label">从概念到应用的学习路径</div>
-          <div class="learning-roadmap">
-            <article class="road-step">
-              <b>01</b><strong>认识语言</strong><p>词、句法、语义与语用</p>
-            </article>
-            <span class="road-arrow" aria-hidden="true">→</span>
-            <article class="road-step">
-              <b>02</b><strong>整理数据</strong><p>字符、分词与语料库</p>
-            </article>
-            <span class="road-arrow" aria-hidden="true">→</span>
-            <article class="road-step">
-              <b>03</b><strong>理解模型</strong><p>机器学习与语言模型</p>
-            </article>
-            <span class="road-arrow" aria-hidden="true">→</span>
-            <article class="road-step road-step-highlight">
-              <b>04</b><strong>解决问题</strong><p>翻译、问答与生成</p>
-            </article>
+        <div class="hero-map" aria-label="计算语言学学习地图">
+          <div class="map-label">学习地图 · 点击节点浏览词条</div>
+          <div class="concept-map">
+            <svg class="concept-lines" viewBox="0 0 600 380" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M 185 191 C 260 191, 275 80, 356 80" />
+              <path d="M 185 191 C 260 191, 275 165, 356 165" />
+              <path d="M 185 191 C 260 191, 275 250, 356 250" />
+              <path d="M 185 191 C 260 191, 275 335, 356 335" />
+            </svg>
+            <button class="map-node map-root" data-map-category="学科导览"><strong>计算语言学</strong><span>语言 + 计算</span></button>
+            <button class="map-node map-language" data-map-category="语言基础"><strong>语言基础</strong><span>词 · 句法 · 语义</span></button>
+            <button class="map-node map-data" data-map-category="数据与表示"><strong>数据与表示</strong><span>字符 · 分词 · 语料</span></button>
+            <button class="map-node map-model" data-map-category="模型与方法"><strong>模型与方法</strong><span>统计 · 学习 · 模型</span></button>
+            <button class="map-node map-task" data-map-category="应用任务"><strong>应用任务</strong><span>翻译 · 问答 · 生成</span></button>
           </div>
         </div>
       </section>
@@ -74,11 +69,18 @@
         </div>
 
         <div class="toolbar">
+          <label class="term-picker">
+            <span>选择分类</span>
+            <select id="categorySelect" aria-label="选择分类"></select>
+          </label>
+          <label class="term-picker">
+            <span>选择词条</span>
+            <select id="termSelect" aria-label="选择词条"></select>
+          </label>
           <label class="search-box">
             <span aria-hidden="true">⌕</span>
             <input id="searchInput" type="search" placeholder="搜索词条，例如：语料库、NLP、language model" />
           </label>
-          <div class="filter-list" id="filterList" aria-label="词条分类"></div>
         </div>
 
         <div class="dictionary-layout">
@@ -87,6 +89,7 @@
             <div id="entryContent"></div>
           </aside>
           <div class="terms-area">
+            <p class="terms-title">所有词条</p>
             <div class="results-meta"><span id="resultsCount">50</span> 个词条</div>
             <div class="term-grid" id="termGrid"></div>
           </div>
@@ -113,6 +116,6 @@
       </div>
       <p>50 个入门词条。内容会继续补充媒体、链接和交互示例。</p>
     </footer>
-    <script src="app.js"></script>
+    <script src="app.js?v=20261016-2"></script>
   </body>
 </html>

@@ -174,23 +174,27 @@ allEntries.forEach(entry => {
 let selectedCategory = "全部";
 let selectedId = 1;
 
-const filterList = document.querySelector("#filterList");
 const termGrid = document.querySelector("#termGrid");
 const entryContent = document.querySelector("#entryContent");
 const searchInput = document.querySelector("#searchInput");
 const resultsCount = document.querySelector("#resultsCount");
+const categorySelect = document.querySelector("#categorySelect");
+const termSelect = document.querySelector("#termSelect");
+
+function renderTermSelect() {
+  const categoryEntries = allEntries.filter(entry => selectedCategory === "全部" || entry.category === selectedCategory);
+  if (!categoryEntries.some(entry => entry.id === selectedId)) selectedId = categoryEntries[0]?.id || 1;
+  termSelect.innerHTML = categoryEntries.map(entry =>
+    `<option value="${entry.id}">${String(entry.id).padStart(2, "0")} · ${entry.term} — ${entry.english}</option>`
+  ).join("");
+  termSelect.value = String(selectedId);
+}
 
 function renderFilters() {
-  filterList.innerHTML = categories.map(category =>
-    `<button class="filter-button ${category === selectedCategory ? "active" : ""}" data-category="${category}">${category}</button>`
+  categorySelect.innerHTML = categories.map(category =>
+    `<option value="${category}">${category === "全部" ? "全部分类" : category}</option>`
   ).join("");
-  filterList.querySelectorAll("button").forEach(button => {
-    button.addEventListener("click", () => {
-      selectedCategory = button.dataset.category;
-      renderFilters();
-      renderTerms();
-    });
-  });
+  categorySelect.value = selectedCategory;
 }
 
 function getVisibleEntries() {
@@ -225,6 +229,7 @@ function renderTerms() {
 
 function renderEntry() {
   const entry = allEntries.find(item => item.id === selectedId) || allEntries[0];
+  termSelect.value = String(entry.id);
   const diagram = entry.id <= 5
     ? `<div class="diagram"><span>语言</span><i></i><span>数据</span><i></i><span>模型</span></div>`
     : "";
@@ -268,7 +273,21 @@ function renderEntry() {
 }
 
 searchInput.addEventListener("input", renderTerms);
+termSelect.addEventListener("change", () => {
+  selectedId = Number(termSelect.value);
+  renderTerms();
+  renderEntry();
+});
+categorySelect.addEventListener("change", () => {
+  selectedCategory = categorySelect.value;
+  searchInput.value = "";
+  renderFilters();
+  renderTermSelect();
+  renderTerms();
+  renderEntry();
+});
 renderFilters();
+renderTermSelect();
 renderTerms();
 renderEntry();
 
@@ -280,9 +299,22 @@ document.querySelector("[data-filter]").addEventListener("click", () => {
   selectedCategory = "全部";
   searchInput.value = "";
   renderFilters();
+  renderTermSelect();
   renderTerms();
   document.getElementById("dictionary").scrollIntoView();
   setTimeout(() => {
     document.querySelector(".term-card.complete")?.click();
   }, 350);
+});
+
+document.querySelectorAll("[data-map-category]").forEach(button => {
+  button.addEventListener("click", () => {
+    selectedCategory = button.dataset.mapCategory;
+    searchInput.value = "";
+    renderFilters();
+    renderTermSelect();
+    renderTerms();
+    renderEntry();
+    document.getElementById("dictionary").scrollIntoView();
+  });
 });
