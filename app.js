@@ -180,6 +180,73 @@ const searchInput = document.querySelector("#searchInput");
 const resultsCount = document.querySelector("#resultsCount");
 const categorySelect = document.querySelector("#categorySelect");
 const termSelect = document.querySelector("#termSelect");
+const entryPanel = document.querySelector("#entryPanel");
+
+const clarityByTerm = {
+  "词素": "把一个词拆成更小的“有意义部分”。它比“词”更小，但不一定能单独使用。",
+  "分词": "先决定文本应该切成哪些处理单位。单位可以是词，也可以是子词或字符。",
+  "中文分词": "中文没有像英文那样用空格分隔词，所以系统必须根据词义和上下文推测词语边界。",
+  "词性标注": "给每个词贴上“名词、动词、形容词”等语法标签，让机器知道它在句子里扮演什么角色。",
+  "命名实体识别": "先找出文本中的重要对象，再判断它属于人物、地点、机构、时间等哪一类。",
+  "词向量": "不是把词翻译成另一种语言，而是把词转换成数字位置，让机器可以比较词语之间的相似程度。",
+  "依存句法": "关注词语之间“谁依赖谁”的关系，而不是只看词语排在第几个位置。",
+  "句法树": "把句子的层次结构画成树，帮助我们看清哪些词组成短语、哪些词承担核心作用。",
+  "词义消歧": "同一个词可能有多个意思，系统要结合上下文判断当前使用的是哪一个意思。"
+};
+
+const visualByTerm = {
+  "词素": {
+    caption: "把词拆成有意义的部分",
+    html: `<div class="visual-row"><span class="visual-token alt">un-</span><span class="visual-arrow">+</span><span class="visual-token">happy</span><span class="visual-arrow">=</span><span class="visual-token neutral">unhappy</span></div><div class="visual-note">前缀 + 词根，共同组成一个词。</div>`
+  },
+  "分词": {
+    caption: "从连续文字中切出处理单位",
+    html: `<div class="visual-row"><span class="visual-token neutral">I love NLP</span><span class="visual-arrow">→</span><span class="visual-token">I</span><span class="visual-token">love</span><span class="visual-token">NLP</span></div>`
+  },
+  "中文分词": {
+    caption: "判断中文词语边界",
+    html: `<div class="visual-row"><span class="visual-token neutral">我喜欢学习计算语言学</span><span class="visual-arrow">→</span><span class="visual-token">我</span><span class="visual-token">喜欢</span><span class="visual-token">学习</span><span class="visual-token">计算语言学</span></div>`
+  },
+  "词性标注": {
+    caption: "给词语贴上语法标签",
+    html: `<div class="visual-row"><span class="visual-token">猫 / 名词</span><span class="visual-token alt">吃 / 动词</span><span class="visual-token">鱼 / 名词</span></div>`
+  },
+  "命名实体识别": {
+    caption: "识别对象，并判断对象类型",
+    html: `<div class="visual-row"><span class="visual-token alt">马云 / 人物</span><span class="visual-token neutral">访问</span><span class="visual-token">杭州 / 地点</span></div>`
+  },
+  "词向量": {
+    caption: "把词放进可以比较距离的数字空间",
+    html: `<div class="visual-row"><span class="visual-token">猫</span><span class="visual-arrow">↔ 近</span><span class="visual-token">狗</span><span class="visual-arrow">　远</span><span class="visual-token neutral">飞机</span></div><div class="visual-note">相似语境中的词，通常会在空间中更接近。</div>`
+  },
+  "依存句法": {
+    caption: "看清词语之间的依赖关系",
+    html: `<div class="visual-row"><span class="visual-token">猫</span><span class="visual-arrow">主语 →</span><span class="visual-token alt">吃</span><span class="visual-arrow">← 宾语</span><span class="visual-token">鱼</span></div>`
+  },
+  "句法树": {
+    caption: "把句子的层次结构画出来",
+    html: `<div class="visual-row"><span class="visual-token neutral">句子</span><span class="visual-arrow">→</span><span class="visual-token">主语：小王</span><span class="visual-token alt">谓语：读书</span></div>`
+  },
+  "词义消歧": {
+    caption: "用上下文判断同一个词的具体意思",
+    html: `<div class="visual-row"><span class="visual-token neutral">我在银行存钱</span><span class="visual-arrow">→</span><span class="visual-token">金融机构</span></div><div class="visual-row"><span class="visual-token neutral">河岸边的银行</span><span class="visual-arrow">→</span><span class="visual-token alt">河岸</span></div>`
+  }
+};
+
+const problemByTerm = {
+  "文本分类": "把客服工单自动分到“退款、物流、产品咨询”等类别。",
+  "情感分析": "从大量用户评价中找出满意、抱怨和需要跟进的问题。",
+  "信息抽取": "从合同或报告中提取人物、日期、金额和关键事件。",
+  "自动摘要": "把一篇长报告压缩成几条可以快速阅读的要点。",
+  "机器翻译": "把产品说明或网页内容转换成另一种语言并保持主要意思。",
+  "问答系统": "让用户直接询问企业知识库，并得到相关答案。",
+  "文本生成": "根据提纲生成报告初稿、教学材料或客服回复。",
+  "语音识别": "把会议、访谈或通话录音转换成可检索的文字。",
+  "文本转语音": "把文章或导航指令转换成自然、清晰的语音。",
+  "词性标注": "为后续句法分析、语法检查或信息抽取准备基础标签。",
+  "命名实体识别": "从新闻、简历或合同中找出人物、机构、地点和日期。",
+  "词向量": "让系统可以计算两个词的相似度，并用于分类或推荐。"
+};
 
 function renderTermSelect() {
   const categoryEntries = allEntries.filter(entry => selectedCategory === "全部" || entry.category === selectedCategory);
@@ -222,6 +289,7 @@ function renderTerms() {
       selectedId = Number(card.dataset.id);
       renderTerms();
       renderEntry();
+      scrollToEntry();
     });
   });
 }
@@ -238,6 +306,15 @@ function renderEntry() {
   const industry = entry.industryApplications.map(item =>
     `<div class="industry-item">${item}</div>`
   ).join("");
+  const clarity = clarityByTerm[entry.term]
+    ? `<div class="clarity-block"><div class="label">先这样理解</div><p>${clarityByTerm[entry.term]}</p></div>`
+    : "";
+  const visual = visualByTerm[entry.term]
+    ? `<div class="visual-example"><div class="visual-caption">${visualByTerm[entry.term].caption}</div>${visualByTerm[entry.term].html}</div>`
+    : "";
+  const realProblem = problemByTerm[entry.term]
+    ? `<div class="label">一个真实问题</div><p class="application">${problemByTerm[entry.term]}</p>`
+    : "";
   entryContent.innerHTML = `
     <h3>${entry.term}</h3>
     <div class="english">${entry.english}</div>
@@ -245,11 +322,14 @@ function renderEntry() {
       <div class="label">核心释义</div>
       <p class="definition">${entry.definition}</p>
     </div>
+    ${clarity}
+    ${visual}
     ${diagram}
     <div class="label">例句</div>
     <div class="example">${entry.example}</div>
     <div class="label">它能做什么</div>
     <p class="application">${entry.application}</p>
+    ${realProblem}
     <div class="label">相关概念</div>
     <div class="chip-list">${related}</div>
     <div class="label">行业应用</div>
@@ -265,9 +345,17 @@ function renderEntry() {
       selectedCategory = "全部";
       searchInput.value = "";
       renderFilters();
+      renderTermSelect();
       renderTerms();
       renderEntry();
+      scrollToEntry();
     });
+  });
+}
+
+function scrollToEntry() {
+  window.requestAnimationFrame(() => {
+    entryPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
@@ -276,6 +364,7 @@ termSelect.addEventListener("change", () => {
   selectedId = Number(termSelect.value);
   renderTerms();
   renderEntry();
+  scrollToEntry();
 });
 categorySelect.addEventListener("change", () => {
   selectedCategory = categorySelect.value;
@@ -311,6 +400,7 @@ document.querySelectorAll("[data-map-category]").forEach(button => {
     renderTermSelect();
     renderTerms();
     renderEntry();
+    scrollToEntry();
     document.getElementById("dictionary").scrollIntoView();
   });
 });
