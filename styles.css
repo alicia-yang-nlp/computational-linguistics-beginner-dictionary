@@ -55,6 +55,8 @@ button { cursor: pointer; }
 .brand strong { font-size: 15px; letter-spacing: .04em; }
 .brand small { color: var(--muted); margin-top: 5px; font-size: 11px; letter-spacing: .11em; text-transform: uppercase; }
 .header-note { color: var(--muted); font-size: 13px; }
+.header-note a { color: var(--coral-dark); text-decoration: none; font-weight: 700; }
+.header-note a:hover { text-decoration: underline; }
 
 .hero {
   min-height: 570px;
@@ -113,6 +115,15 @@ h2 { font-family: Georgia, "Songti SC", serif; font-size: 42px; line-height: 1.1
 .search-box { grid-column: 1 / -1; }
 .filter-button { border: 1px solid var(--line); background: transparent; color: var(--muted); padding: 8px 11px; font-size: 12px; }
 .filter-button.active, .filter-button:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.learning-guide { display: grid; grid-template-columns: 180px 1fr; gap: 24px; align-items: center; padding: 18px 0 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+.guide-kicker { color: var(--coral-dark); font-size: 10px; letter-spacing: .14em; margin: 0 0 5px; }
+.learning-guide h3 { font-size: 18px; margin: 0; }
+.guide-steps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.guide-step { min-height: 68px; padding: 10px; text-align: left; border: 1px solid var(--line); background: transparent; color: var(--ink); }
+.guide-step:hover, .guide-step:focus-visible { border-color: var(--coral); background: var(--white); outline: none; }
+.guide-step b, .guide-step span { display: block; }
+.guide-step b { color: var(--coral-dark); font-size: 10px; margin-bottom: 8px; }
+.guide-step span { font-size: 12px; line-height: 1.35; }
 .dictionary-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .92fr); gap: 28px; align-items: start; }
 .terms-area { min-width: 0; }
 .terms-title { margin: 6px 0 1px; color: var(--ink); font-size: 15px; font-weight: 700; }
@@ -132,6 +143,17 @@ h2 { font-family: Georgia, "Songti SC", serif; font-size: 42px; line-height: 1.1
 .definition-block { padding: 18px; background: transparent; color: var(--ink); border: 1px solid #cfc9bd; border-left: 4px solid var(--coral); }
 .definition-block .label { color: var(--coral-dark); margin-top: 0; }
 .entry-panel .definition { font-size: 16px; line-height: 1.8; margin: 0; }
+.clarity-block { margin-top: 16px; padding: 14px 16px; background: rgba(255,253,248,.48); border-left: 2px solid var(--yellow); }
+.clarity-block .label { margin-top: 0; }
+.clarity-block p { margin: 0; color: #57544e; font-size: 13px; line-height: 1.7; }
+.visual-example { margin-top: 14px; padding: 14px; border: 1px solid #cfc9bd; background: rgba(255,253,248,.58); }
+.visual-caption { color: var(--muted); font-size: 11px; margin-bottom: 9px; }
+.visual-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.visual-token { padding: 6px 8px; background: #e4ebe0; border: 1px solid #bac9b4; font-size: 12px; }
+.visual-token.alt { background: #f1e3d9; border-color: #d9b8a5; }
+.visual-token.neutral { background: #f0eee8; border-color: #d4cec2; }
+.visual-arrow { color: var(--coral-dark); font-size: 15px; }
+.visual-note { width: 100%; color: var(--muted); font-size: 11px; margin-top: 8px; }
 .entry-panel .label { color: var(--coral-dark); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; margin: 22px 0 7px; }
 .entry-panel .example { padding: 14px 16px; border-left: 2px solid var(--coral); background: rgba(255,253,248,.46); font-size: 14px; }
 .entry-panel .application { color: #57544e; font-size: 13px; }
@@ -163,6 +185,8 @@ h2 { font-family: Georgia, "Songti SC", serif; font-size: 42px; line-height: 1.1
   .dictionary-layout, .principles { grid-template-columns: 1fr; }
   .entry-panel { position: static; min-height: 0; }
   .principle-grid { grid-template-columns: repeat(3, 1fr); }
+  .learning-guide { grid-template-columns: 1fr; gap: 15px; }
+  .guide-steps { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 600px) {
@@ -185,6 +209,7 @@ h2 { font-family: Georgia, "Songti SC", serif; font-size: 42px; line-height: 1.1
   .map-model { left: 53%; top: 186px; }
   .map-task { left: 53%; top: 272px; }
   .toolbar { grid-template-columns: 1fr; }
+  .guide-steps { grid-template-columns: repeat(2, 1fr); }
   .entry-panel { padding: 23px; }
   .entry-panel h3 { font-size: 31px; }
   .definition-block { padding: 16px; }
